@@ -31,6 +31,8 @@ import (
 const (
 	// CassandraStorageType is the storage type flag denoting a Cassandra backing store
 	CassandraStorageType = "cassandra"
+	// ElasticSearchType is the storage type flag denoting a ElasticSearch backing store
+	ElasticSearchStorageType = "elasticsearch"
 	// MemoryStorageType is the storage type flag denoting an in-memory store
 	MemoryStorageType = "memory"
 )
@@ -79,8 +81,8 @@ func (co cassandraOptions) ServerList() []string {
 func init() {
 	flag.StringVar(&Logging.Level, "log-level", "info", "Minimal allowed log level")
 	flag.DurationVar(&RuntimeMetricsFrequency, "runtime-metrics-frequency", 1*time.Second, "The frequency of reporting Go runtime metrics")
-	flag.StringVar(&SpanStorage.Type, "span-storage.type", CassandraStorageType, fmt.Sprintf("The type of span storage backend to use, options are currently [%v,%v]", CassandraStorageType, MemoryStorageType))
+	flag.StringVar(&SpanStorage.Type, "span-storage.type", CassandraStorageType, fmt.Sprintf("The type of span storage backend to use, options are currently [%v,%v,%v]", CassandraStorageType, ElasticSearchStorageType, MemoryStorageType))
 
-	flag.StringVar(&DependencyStorage.Type, "dependency-storage.type", CassandraStorageType, fmt.Sprintf("The type of dependency storage backend to use, options are currently [%v,%v]", CassandraStorageType, MemoryStorageType))
+	flag.StringVar(&DependencyStorage.Type, "dependency-storage.type", CassandraStorageType, fmt.Sprintf("The type of dependency storage backend to use, options are currently [%v,%v,%v]", CassandraStorageType, ElasticSearchStorageType, MemoryStorageType))
 	flag.DurationVar(&DependencyStorage.DataFrequency, "dependency-storage.data-frequency", time.Hour*24, "Frequency of service dependency calculations")
 }

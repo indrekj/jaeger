@@ -4,5 +4,5 @@ FROM jpkroehling/cassandra
 COPY cassandra3v001-schema.sh /cassandra-schema/
 COPY create-schema.sh /cassandra-schema/
 
-ENV CQLSH_HOST=cassandra
+ENV CQLSH_HOST=localhost
 CMD ["/cassandra-schema/create-schema.sh"]

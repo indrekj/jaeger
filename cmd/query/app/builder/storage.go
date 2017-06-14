@@ -51,6 +51,8 @@ func NewStorageBuilder(opts ...basicB.Option) (StorageBuilder, error) {
 		}
 		// TODO technically span and dependency storage might be separate
 		return newCassandraBuilder(options.Cassandra, options.Logger, options.MetricsFactory), nil
+	} else if flags.SpanStorage.Type == flags.ElasticSearchStorageType {
+		return newElasticSearchBuilder(options.Logger, options.MetricsFactory), nil
 	} else if flags.SpanStorage.Type == flags.MemoryStorageType {
 		if options.MemoryStore == nil {
 			return nil, errMissingMemoryStore
